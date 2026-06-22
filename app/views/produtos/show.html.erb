@@ -1,0 +1,42 @@
+<style>
+  body { font-family: sans-serif; background-color: #f3f4f6; margin: 0; padding: 40px; }
+  .container { max-width: 550px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+  .notice { color: #047857; background-color: #ecfdf5; border: 1px solid #a7f3d0; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 500; text-align: center; }
+  .prod-nome { font-size: 22px; font-weight: bold; color: #111827; margin-top: 0; margin-bottom: 10px; }
+  .prod-preco { font-size: 20px; font-weight: bold; color: #047857; margin-bottom: 15px; }
+  .label { font-weight: bold; color: #374151; font-size: 14px; margin-bottom: 4px; display: block; }
+  .box-desc { background: #f9fafb; border: 1px solid #e5e7eb; padding: 15px; border-radius: 8px; color: #4b5563; font-size: 15px; margin-bottom: 25px; line-height: 1.5; }
+  .btn-buy { display: block; text-align: center; background-color: #2563eb; color: white; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 16px; margin-bottom: 20px; transition: background 0.2s; }
+  .btn-buy:hover { background-color: #1d4ed8; }
+  .actions-nav { display: flex; justify-content: space-between; border-top: 1px solid #e5e7eb; padding-top: 15px; }
+  .link-secondary { color: #4b5563; text-decoration: none; font-size: 14px; }
+  .link-secondary:hover { text-decoration: underline; }
+</style>
+
+<div class="container">
+  <% if notice.present? %>
+    <div class="notice">✓ Achado cadastrado com sucesso!</div>
+  <% end %>
+
+  <h1 class="prod-nome"><%= @produto.nome %></h1>
+  <div class="prod-preco"><%= @produto.preco %></div>
+
+  <% if @produto.foto.attached? %>
+    <div style="text-align: center; margin-bottom: 20px;">
+      <%= image_tag @produto.foto, style: "max-width: 100%; max-height: 250px; border-radius: 8px; object-fit: contain;" %>
+    </div>
+  <% end %>
+
+  <span class="label">Detalhes do produto:</span>
+  <div class="box-desc">
+    <%= @produto.descricao %>
+  </div>
+
+  <a href="<%= @produto.link %>" target="_blank" class="btn-buy">Ir para a Loja Oficial ↗</a>
+
+  <div class="actions-nav">
+    <%= link_to "← Voltar ao Painel", produtos_path, class: "link-secondary" %>
+    <%= link_to "Editar Informações", edit_produto_path(@produto), class: "link-secondary" %>
+    <%= link_to "Excluir Produto", @produto, data: { turbo_method: :delete, turbo_confirm: "Remover permanentemente?" }, class: "link-secondary", style: "color: #dc2626;" %>
+  </div>
+</div>

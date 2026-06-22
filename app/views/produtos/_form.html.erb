@@ -1,0 +1,50 @@
+<style>
+  .form-group { margin-bottom: 16px; }
+  .form-label { display: block; font-weight: bold; color: #374151; margin-bottom: 6px; font-size: 14px; }
+  .form-input { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; box-sizing: border-box; font-size: 15px; }
+  .form-input:focus { border-color: #10b981; outline: none; box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
+  .btn-submit { background-color: #10b981; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; width: 100%; transition: background 0.2s; }
+  .btn-submit:hover { background-color: #059669; }
+</style>
+
+<%= form_with(model: produto) do |form| %>
+  <% if produto.errors.any? %>
+    <div style="color: red; margin-bottom: 20px;">
+      <h2>Erro ao salvar produto:</h2>
+      <ul>
+        <% produto.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :nome, "Nome do Produto", class: "form-label" %>
+    <%= form.text_field :nome, class: "form-input", placeholder: "Ex: Caixa de Som Bluetooth JBL" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :preco, "Preço do Produto", class: "form-label" %>
+    <%= form.text_field :preco, class: "form-input", placeholder: "Ex: R$ 189,90" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :link, "Link de Compra (URL)", class: "form-label" %>
+    <%= form.text_field :link, class: "form-input", placeholder: "Ex: https://shopee.com.br..." %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :descricao, "Descrição / Detalhes do Achado", class: "form-label" %>
+    <%= form.text_area :descricao, rows: 3, class: "form-input", placeholder: "Ex: Cupom de frete grátis ativo no link." %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :foto, "Foto do Produto", class: "form-label" %>
+    <%= form.file_field :foto, class: "form-input" %>
+  </div>
+
+  <div>
+    <%= form.submit "Salvar no Painel de Achados", class: "btn-submit" %>
+  </div>
+<% end %>

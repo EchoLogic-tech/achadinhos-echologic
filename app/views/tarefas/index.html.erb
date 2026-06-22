@@ -1,0 +1,38 @@
+<style>
+  body { font-family: sans-serif; background-color: #f3f4f6; margin: 0; padding: 40px; }
+  .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+  .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 15px; margin-bottom: 20px; }
+  .title { font-size: 24px; font-weight: bold; color: #1f2937; margin: 0; }
+  .btn-blue { background-color: #2563eb; color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 14px; }
+  .btn-blue:hover { background-color: #1d4ed8; }
+  .card { background: #f9fafb; border: 1px solid #e5e7eb; padding: 15px; border-radius: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+  .card-title { font-size: 18px; font-weight: bold; color: #111827; margin: 0; }
+  .card-desc { color: #4b5563; font-size: 14px; margin: 5px 0 0 0; }
+  .actions { display: flex; gap: 8px; }
+  .btn-view { color: #2563eb; text-decoration: none; border: 1px solid #2563eb; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; }
+  .btn-view:hover { background: #eff6ff; }
+  .btn-delete { color: #dc2626; text-decoration: none; border: 1px solid #dc2626; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; }
+  .btn-delete:hover { background: #fef2f2; }
+</style>
+
+<div class="container">
+  <div class="header">
+    <h1 class="title">Minhas Tarefas</h1>
+    <%= link_to "Nova Tarefa", new_tarefa_path, class: "btn-blue" %>
+  </div>
+
+  <div id="tarefas">
+    <% @tarefas.each do |tarefa| %>
+      <div class="card">
+        <div>
+          <h3 class="card-title"><%= tarefa.titulo %></h3>
+          <p class="card-desc"><%= tarefa.descricao %></p>
+        </div>
+        <div class="actions">
+          <%= link_to "Ver", tarefa, class: "btn-view" %>
+          <%= link_to "Excluir", tarefa, data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" }, class: "btn-delete" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

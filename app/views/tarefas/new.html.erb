@@ -1,0 +1,15 @@
+<style>
+  body { font-family: sans-serif; background-color: #f3f4f6; margin: 0; padding: 40px; }
+  .container { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+  .title { font-size: 24px; font-weight: bold; color: #047857; margin-top: 0; margin-bottom: 20px; }
+  .link-back { display: inline-block; margin-top: 15px; color: #4b5563; text-decoration: none; font-size: 14px; }
+  .link-back:hover { text-decoration: underline; }
+</style>
+
+<div class="container">
+  <h1 class="title">Cadastrar Novo Achado</h1>
+
+  <%= render "form", produto: @produto %>
+
+  <%= link_to "← Voltar para o Painel", produtos_path, class: "link-back" %>
+</div>

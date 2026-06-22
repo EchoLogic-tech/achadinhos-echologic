@@ -1,0 +1,56 @@
+<style>
+  body { font-family: sans-serif; background-color: #f3f4f6; margin: 0; padding: 40px; }
+  .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+  .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 15px; margin-bottom: 20px; }
+  .title { font-size: 24px; font-weight: bold; color: #047857; margin: 0; }
+  .btn-green { background-color: #10b981; color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 14px; }
+  .btn-green:hover { background-color: #059669; }
+  .card { background: #f9fafb; border: 1px solid #e5e7eb; padding: 20px; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .prod-info-wrapper { display: flex; align-items: center; gap: 15px; flex: 1; }
+  .prod-thumb { width: 80px; height: 80px; border-radius: 8px; border: 1px solid #e5e7eb; object-fit: contain; background: white; flex-shrink: 0; }
+  .prod-no-thumb { width: 80px; height: 80px; border-radius: 8px; border: 1px solid #e5e7eb; background: #e5e7eb; display: flex; align-items: center; justify-content: center; color: #9ca3af; font-size: 12px; font-weight: bold; text-align: center; flex-shrink: 0; }
+  .prod-details { flex: 1; }
+  .prod-nome { font-size: 18px; font-weight: bold; color: #111827; margin: 0; }
+  .prod-preco { color: #047857; font-weight: bold; font-size: 16px; margin: 4px 0; }
+  .prod-desc { color: #4b5563; font-size: 14px; margin: 5px 0; }
+  .actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .btn-link { background-color: #2563eb; color: white; text-decoration: none; padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: bold; white-space: nowrap; }
+  .btn-link:hover { background-color: #1d4ed8; }
+  .btn-edit { background-color: #f3f4f6; color: #374151; text-decoration: none; border: 1px solid #d1d5db; padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: bold; white-space: nowrap; }
+  .btn-edit:hover { background-color: #e5e7eb; }
+  .btn-delete { color: #dc2626; text-decoration: none; border: 1px solid #dc2626; padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 500; white-space: nowrap; }
+  .btn-delete:hover { background: #fef2f2; }
+</style>
+
+<div class="container">
+  <div class="header">
+    <h1 class="title">Achadinhos ECHOLOGIC</h1>
+    <%= link_to "+ Novo Achado", new_produto_path, class: "btn-green" %>
+  </div>
+
+  <div id="produtos">
+    <% @produtos.each do |produto| %>
+      <div class="card">
+        <div class="prod-info-wrapper">
+          <% if produto.foto.attached? %>
+            <%= image_tag produto.foto, class: "prod-thumb" %>
+          <% else %>
+            <div class="prod-no-thumb">Sem Foto</div>
+          <% end %>
+          
+          <div class="prod-details">
+            <h3 class="prod-nome"><%= produto.nome %></h3>
+            <div class="prod-preco"><%= produto.preco %></div>
+            <p class="prod-desc"><%= produto.descricao %></p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <%= link_to "Editar", edit_produto_path(produto), class: "btn-edit" %>
+          <a href="<%= produto.link %>" target="_blank" class="btn-link">Ir p/ Loja</a>
+          <%= link_to "Excluir", produto, data: { turbo_method: :delete, turbo_confirm: "Remover este achado?" }, class: "btn-delete" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
