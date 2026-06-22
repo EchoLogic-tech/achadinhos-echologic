@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :produtos
+root "produtos#index"
   resources :tarefas
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
