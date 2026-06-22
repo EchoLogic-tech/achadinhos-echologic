@@ -40,8 +40,13 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :foto, "Foto do Produto", class: "form-label" %>
-    <%= form.file_field :foto, class: "form-input" %>
+    <%= form.label :categoria, "Categoria do Produto", class: "form-label" %>
+    <%= form.select :categoria, ["Beleza & Saúde", "Bebês & Crianças", "Cozinha & Casa", "Eletrônicos", "Outros"], { prompt: "Selecione uma categoria" }, class: "form-input" %>
+  </div>
+
+    <div class="form-group">
+    <%= form.label :categoria, "Categoria do Produto", class: "form-label" %>
+    <%= form.select :categoria, ["Beleza & Saúde", "Bebês & Crianças", "Cozinha & Casa", "Eletrônicos", "Outros"], { prompt: "Selecione uma categoria" }, class: "form-input" %>
   </div>
 
   <div>

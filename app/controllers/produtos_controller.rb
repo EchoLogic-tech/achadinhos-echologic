@@ -2,9 +2,11 @@ class ProdutosController < ApplicationController
   before_action :set_produto, only: %i[ show edit update destroy ]
 
   # GET /produtos or /produtos.json
-  def index
-    @produtos = Produto.all
-  end
+    def index
+  @produtos = Produto.all
+  @produtos = @produtos.where("nome LIKE ?", "%#{params[:busca]}%") if params[:busca].present?
+  @produtos = @produtos.where(categoria: params[:cat]) if params[:cat].present?
+end
 
   # GET /produtos/1 or /produtos/1.json
   def show
@@ -65,6 +67,6 @@ class ProdutosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def produto_params
-          params.expect(produto: [ :nome, :preco, :link, :descricao, :foto ])
+          params.expect(produto: [ :nome, :preco, :link, :descricao, :foto ,:categoria ])
     end
 end
